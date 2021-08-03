@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/D1Problems/D1Problems.iml" filepath="$PROJECT_DIR$/D1Problems/D1Problems.iml" />
       <module fileurl="file://$PROJECT_DIR$/D2Problems/D2Problems.iml" filepath="$PROJECT_DIR$/D2Problems/D2Problems.iml" />
+      <module fileurl="file://$PROJECT_DIR$/D3Problems/D3Problems.iml" filepath="$PROJECT_DIR$/D3Problems/D3Problems.iml" />
       <module fileurl="file://$PROJECT_DIR$/SWExpertAcademy.iml" filepath="$PROJECT_DIR$/SWExpertAcademy.iml" />
     </modules>
   </component>
