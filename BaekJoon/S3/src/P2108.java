@@ -1,48 +1,69 @@
 /*
- * BOJ 1065 한수
+ * BOJ 2108 통계학
  *
- * memory : 14280kb
- * time : 124ms
+ * memory : 74764kb
+ * time : 704ms
  */
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class P1065 {
+public class P2108 {
 
+    static StringBuilder sb = new StringBuilder();
     static FastReader fr = new FastReader();
 
-    static int N, ans;
+    static int[] arr;
+    static int N;
 
     static void input() {
 
         N = fr.nextInt();
-    }
 
-    static boolean isHansu(int num) {
+        arr = new int[N];
 
-        if(num < 100) {
-            return true;
+        for(int i=0; i<N; i++) {
+            arr[i] = fr.nextInt();
         }
-        else if(num < 1000) {
-            int one = num / 100;
-            int two = (num % 100) / 10;
-            int three = num % 10;
-
-            if(one - two == two - three) {
-                return true;
-            }
-        }
-        return false;
     }
 
     static void pro() {
 
-        for(int i=1; i<=N; i++) {
-            if(isHansu(i)) ans++;
+        Arrays.sort(arr);
+        int sum = 0;
+        int[] count = new int[8001];
+
+        for(int i=0; i<N; i++) {
+            sum += arr[i];
+            count[arr[i]+4000]++;
         }
 
-        System.out.print(ans);
+        int max = Integer.MIN_VALUE;
+        for(int i=0; i<count.length; i++) {
+            max = Math.max(max, count[i]);
+        }
+
+        int choibin = 4001;
+        int cnt = 0;
+        for(int i=0; i<count.length; i++) {
+            if(count[i] == max) {
+                choibin = i-4000;
+                cnt++;
+            }
+            if(cnt == 2) {
+                break;
+            }
+        }
+
+        int ans = (int) Math.round((double) sum / N);
+
+        sb.append(ans).append("\n");
+        sb.append(arr[N/2]).append("\n");
+        sb.append(choibin).append("\n");
+        sb.append(arr[N-1] - arr[0]);
+
+        System.out.print(sb);
     }
 
     public static void main(String[] args) {
