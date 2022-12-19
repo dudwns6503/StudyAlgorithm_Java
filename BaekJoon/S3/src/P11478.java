@@ -1,8 +1,8 @@
 /*
  * BOJ 11478 서로 다른 부분 문자열의 개수
  *
- * memory : kb
- * time : ms
+ * memory : 226560kb
+ * time : 748ms
  */
 
 
