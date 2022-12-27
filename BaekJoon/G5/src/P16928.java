@@ -1,8 +1,8 @@
 /*
  * BOJ 16928 뱀과 사다리 게임
  *
- * memory : 58132kb
- * time : 252ms
+ * memory : 59372kb
+ * time : 240ms
  */
 
 import java.io.BufferedReader;
@@ -14,6 +14,7 @@ public class P16928 {
 
     static final int MAX = Integer.MAX_VALUE;
     static ArrayList<Integer>[] arr = new ArrayList[101];
+    static Set<Integer> snakeOrLadderPresentNumbers = new HashSet<>();
     static int[] visited;
     static int n, m;
 
@@ -61,11 +62,18 @@ public class P16928 {
         /**
          * 뱀 or 사다리가 있는 번호라면, 이전에 ArrayList에 등록한 번호들을 먼저 다 지우고,
          * 뱀 or 사다리가 이어진 번호만 입력한다.
+         * Set 자료구조에 from(뱀 or 사다리가 있는 번호) 추가
+         *
+         * 왜 Set 자료구조를 썼나요?
+         * 물론 ArrayList를 써도 된다.
+         * 문제 조건상 뱀 or 사다리가 동시에 존재하는 경우가 없고(중복되는 경우 X),
+         * HashSet의 contains()가 ArrayList contains()보다 성능이 좋기 때문에 사용하였다.
          */
         StringTokenizer st = new StringTokenizer(br.readLine());
         int from = Integer.parseInt(st.nextToken());
         int to = Integer.parseInt(st.nextToken());
 
+        snakeOrLadderPresentNumbers.add(from);
         arr[from].clear();
         arr[from].add(to);
     }
@@ -90,14 +98,11 @@ public class P16928 {
                 if (visited[y] < visited[x] + 1) continue;
 
                 /**
-                 * 현재 번호(x)가 사다리 or 뱀이 있는 칸이라면 주사위의 횟수를 카운트하지않고 이동한다.
+                 * if: 현재 번호(x)가 사다리 or 뱀이 있는 칸이라면 주사위의 횟수를 카운트하지않고 이동한다.
+                 * else: 현재 번호(x)가 평범한 칸이라면 다음 칸으로 이동할 때 주사위의 횟수를 +1하고 이동한다.
                  * 그리고 Queue에 넣는다.
-                 *
-                 * 왜 x != 99를 넣었는가?
-                 * 이 방식에서 arr[x].size() == 1만 한다면 99번에는 100번만 들어있기 때문에
-                 * 99번도 조건에 해당되어서 99번에서 100번으로 이동할 때 주사위 +1이 카운트되지 않는다.
                  */
-                if (arr[x].size() == 1 && x != 99) {
+                if (snakeOrLadderPresentNumbers.contains(x)) {
                     visited[y] = Math.min(visited[y], visited[x]);
                     queue.offer(y);
                 }
