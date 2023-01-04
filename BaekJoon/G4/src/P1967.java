@@ -17,8 +17,7 @@ public class P1967 {
     private static boolean[] visited;
     private static int max_node, n, max = -1;
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         input();
         solve();
     }
@@ -81,3 +80,4 @@ public class P1967 {
             this.weight = weight;
         }
     }
+}
