@@ -1,8 +1,8 @@
 /*
  * BOJ 10811 바구니 뒤집기
  *
- * memory : 14396kb
- * time : 128ms
+ * memory : 14256kb
+ * time : 124ms
  */
 
 
@@ -45,7 +45,7 @@ public class P10811 {
     }
 
     private static void solve(int start, int end) {
-        while (start <= end) {
+        while (start < end) {
             int temp = buckets[start];
             buckets[start] = buckets[end];
             buckets[end] = temp;
