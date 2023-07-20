@@ -1,11 +1,16 @@
 /*
-BaekJoon 2480 주사위 세개
+ * BOJ 5337 웰컴
+ *
+ * memory : 13856kb
+ * time : 108ms
+ */
 
-예외처리를 확실하게 하는 것이 포인트이다. -> 반례를 생각하는데 시간이 오래걸림.
-*/
+
 public class P5337 {
 
     public static void main(String[] args) {
-        System.out.println();
+        System.out.println(".  .   .\n" +
+                "|  | _ | _. _ ._ _  _\n" +
+                "|/\\|(/.|(_.(_)[ | )(/.");
     }
 }
