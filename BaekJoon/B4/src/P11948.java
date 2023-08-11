@@ -42,4 +42,3 @@ public class P11948 {
         System.out.print(sum);
     }
 }
-```
