@@ -1,27 +1,38 @@
 /*
-BaekJoon 1546 평균
-*/
+ * BOJ 1546 평균
+ *
+ * memory : 16384kb
+ * time : 108ms
+ */
 
-import java.util.*;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class P1546 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int max = Integer.MIN_VALUE;
-        int[] arr = new int[N];
-        double[] douArr = new double[N];
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int n = Integer.parseInt(br.readLine());
+
+        double[] scores = new double[n];
+        double max = -1;
+
+        st = new StringTokenizer(br.readLine());
         double sum = 0;
-        double avg = 0;
-        for(int i=0; i<N; i++) {
-            arr[i] = sc.nextInt();
-            max = Math.max(max, arr[i]);
+        for (int i = 0; i < n; i++) {
+            scores[i] = Double.parseDouble(st.nextToken());
+            sum += scores[i];
+
+            if (scores[i] > max)
+                max = scores[i];
         }
-        for(int i=0; i<N; i++) {
-            douArr[i] = ((double) arr[i] / max) * 100;
-            sum += douArr[i];
-        }
-        avg = sum / N;
-        System.out.println(avg);
+
+        double ans = (sum / max * 100) / n;
+
+        System.out.print(ans);
     }
 }
