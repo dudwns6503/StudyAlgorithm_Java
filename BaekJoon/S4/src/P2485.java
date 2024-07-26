@@ -42,7 +42,7 @@ public class P2485 {
         // 가로수 사이의 거리의 최대 공약수를 구한다.
         int gcd = find_gcd(diff[0], diff[1]);
 
-        for (int i = 2; i < n - 2; i++) {
+        for (int i = 2; i < n - 1; i++) {
             gcd = find_gcd(gcd, diff[i]);
         }
 
