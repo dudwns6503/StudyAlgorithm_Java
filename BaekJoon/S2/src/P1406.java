@@ -1,8 +1,8 @@
 /*
  * BOJ 1406 에디터
  *
- * memory : 126396kb
- * time : 796ms
+ * memory : 124016kb
+ * time : 676ms
  */
 
 
@@ -13,83 +13,74 @@ import java.util.StringTokenizer;
 
 public class P1406 {
 
-    private static StringBuilder sb1 = new StringBuilder();
-    private static StringBuilder sb2 = new StringBuilder();
-    private static Stack<String> stack1 = new Stack<>();
-    private static Stack<String> stack2 = new Stack<>();
+    private static StringBuilder sb = new StringBuilder();
+    private static Stack<String> leftStack = new Stack<>();
+    private static Stack<String> rightStack = new Stack<>();
+    private static String str;
+    private static int n, m;
 
     public static void main(String[] args) throws Exception {
         input();
+    }
+
+    private static void solve(String order, String word) {
+        // order가 P인 경우
+        leftStack.push(word);
+    }
+
+    private static void solve(String order) {
+        // P가 아닌 나머지
+        if (order.equals("L")) {
+            if (!leftStack.isEmpty())
+                rightStack.push(leftStack.pop());
+        } else if (order.equals("D")) {
+            if (!rightStack.isEmpty())
+                leftStack.push(rightStack.pop());
+        } else {
+            if (!leftStack.isEmpty())
+                leftStack.pop();
+        }
     }
 
     private static void input() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        String[] strings = br.readLine().split("");
+        str = br.readLine();
 
-        for (int i = 0; i < strings.length; i++) {
-            stack1.push(strings[i]);
+        n = str.length();
+
+        m = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            leftStack.push(String.valueOf(str.charAt(i)));
         }
-
-        int m = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
 
             String order = st.nextToken();
+            if (order.equals("P")) {
+                String word = st.nextToken();
 
-            if (order.equals("L")) {
-                cursorLeft();
-            } else if (order.equals("D")) {
-                cursorRight();
-            } else if (order.equals("B")) {
-                removeCharacter();
-            } else {
-                String character = st.nextToken();
-                addCharacter(character);
+                solve(order, word);
+            }
+            else {
+                solve(order);
             }
         }
 
-        solve();
-    }
-
-    // Stack이 비어있는지 체크를 먼저 해주어야 한다.
-    private static void cursorLeft() {
-        if (!stack1.isEmpty()) {
-            stack2.push(stack1.pop());
-        }
-    }
-
-    private static void cursorRight() {
-        if (!stack2.isEmpty()) {
-            stack1.push(stack2.pop());
-        }
-    }
-
-    private static void removeCharacter() {
-        if (!stack1.isEmpty()) {
-            stack1.pop();
-        }
-    }
-
-    private static void addCharacter(String character) {
-        stack1.push(character);
-    }
-
-    private static void solve() {
-        // Stack1에 있는 원소들은 sb1에 Stack2 원소들은 sb2에 담았다.
-        while (!stack1.isEmpty()) {
-            sb1.append(stack1.pop());
+        // for문 쓰면 안됨. size가 계속 작아지기 때문에 탐색하지 못하는 원소가 생긴다.
+        while (!leftStack.isEmpty()) {
+            sb.append(leftStack.pop());
         }
 
-        while (!stack2.isEmpty()) {
-            sb2.append(stack2.pop());
+        sb.reverse();
+
+        while (!rightStack.isEmpty()) {
+            sb.append(rightStack.pop());
         }
 
-        // Stack1은 역순으로 출력하여야 한다.
-        sb1.reverse();
-        sb1.append(sb2);
-        System.out.print(sb1);
+        System.out.print(sb);
     }
 }
