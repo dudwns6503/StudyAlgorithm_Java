@@ -1,8 +1,8 @@
 /*
  * BOJ 11403 경로 찾기
  *
- * memory : 16968kb
- * time : 380ms
+ * memory : 15152kb
+ * time : 148ms
  */
 
 
@@ -12,53 +12,55 @@ import java.util.StringTokenizer;
 
 public class P11403 {
 
-    static int[][] graph;
-    static int N;
+    private static int[][] graph;
+    private static int n;
 
-    static void input() throws Exception {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        N = Integer.parseInt(br.readLine());
-
-        graph = new int[N + 1][N + 1];
-
-        for(int i=1; i<=N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            for(int j=1; j<=N; j++) {
-                graph[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
+    public static void main(String[] args) throws Exception {
+        input();
+        solve();
     }
 
-    static void floyedWarshall() {
+    private static void solve() {
+        floyedWarshall();
 
-        for(int k=1; k<=N; k++) {
-            for(int i=1; i<=N; i++) {
-                for(int j=1; j<=N; j++) {
-                    if(graph[i][k] == 1 && graph[k][j] == 1) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(graph[i][j]).append(" ");
+            }
+
+            sb.append("\n");
+        }
+
+        if (sb.length() > 0)
+            sb.deleteCharAt(sb.length() - 1);
+
+        System.out.print(sb);
+    }
+
+    private static void floyedWarshall() {
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (graph[i][k] != 0 && graph[k][j] != 0)
                         graph[i][j] = 1;
-                    }
                 }
             }
         }
     }
 
-    static void pro() {
+    private static void input() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
 
-        floyedWarshall();
+        n = Integer.parseInt(br.readLine());
+        graph = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
 
-        for(int i=1; i<=N; i++) {
-            for(int j=1; j<=N; j++) {
-                System.out.print(graph[i][j] + " ");
+            for (int j = 0; j < n; j++) {
+                graph[i][j] = Integer.parseInt(st.nextToken());
             }
-            System.out.println();
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-
-        input();
-        pro();
     }
 }
