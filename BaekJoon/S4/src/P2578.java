@@ -60,7 +60,7 @@ public class P2578 {
                 cnt++;
         }
 
-        // 대각선 (왼쪽 위에서 왼쪽 아래)
+        // 대각선 (왼쪽 위에서 오른쪽 아래)
         isBingo = true;
         for (int i = 0; i < 5; i++) {
             if (bingo[i][i] != 0) {
