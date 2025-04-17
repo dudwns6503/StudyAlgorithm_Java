@@ -1,5 +1,5 @@
 /*
- * BOJ 鉛筆 2 (Pencils 2)
+ * BOJ 33161 鉛筆 2 (Pencils 2)
  *
  * memory : 14148kb
  * time : 100ms
