@@ -8,6 +8,7 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.YearMonth;
 
 public class P33612 {
 
@@ -19,21 +20,10 @@ public class P33612 {
     }
 
     private static void solve() {
-        int year = 2024;
-        int month = 8;
+        YearMonth ym = YearMonth.of(2024, 8)
+                .plusMonths(7 * (n - 1));
 
-        month += 7 * (n - 1);
-
-        if (month % 12 == 0) {
-            year += (month / 12) - 1;
-            month = 12;
-        }
-        else {
-            year += month / 12;
-            month %= 12;
-        }
-
-        System.out.print(year + " " + month);
+        System.out.print(ym.getYear() + " " + ym.getMonthValue());
     }
 
     private static void input() throws Exception {
